@@ -1,0 +1,20 @@
+:root {
+  --field-size: 80vh;
+  text-align: center;
+}
+#render {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+#render table {
+  width: calc(var(--field-size) / 22 * 10);
+	height: var(--field-size);
+	border: solid black 1px;
+}
+#render td {
+	padding: 0;
+	border: solid black 1px;
+}

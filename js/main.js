@@ -7,17 +7,95 @@ class TetriMino {
 	apper() {
 		switch (this.type) {
 			case "O":
-				let mino = [
-					document.querySelector(`td[data-cellnum="0E"]`),
-					document.querySelector(`td[data-cellnum="0F"]`),
-					document.querySelector(`td[data-cellnum="1E"]`),
-					document.querySelector(`td[data-cellnum="1F"]`)
-				];
-				mino.forEach(cell => {
-					cell.style["background-color"] = "#252525";
-					cell.dataset["tetristhere"] = true;
-					cell.dataset["ismoving"] = true;
-				});
+				{
+					let mino = [
+						document.querySelector(`td[data-cellnum="0E"]`),
+						document.querySelector(`td[data-cellnum="0F"]`),
+						document.querySelector(`td[data-cellnum="1E"]`),
+						document.querySelector(`td[data-cellnum="1F"]`)
+					];
+					mino.forEach(cell => {
+						cell.style["background-color"] = "#252525";
+						cell.dataset["tetristhere"] = true;
+						cell.dataset["ismoving"] = true;
+					});
+					break;
+				}
+			case "I":
+				{
+					let mino = [
+						document.querySelector(`td[data-cellnum="0D"]`),
+						document.querySelector(`td[data-cellnum="0E"]`),
+						document.querySelector(`td[data-cellnum="0F"]`),
+						document.querySelector(`td[data-cellnum="0G"]`)
+					];
+					mino.forEach(cell => {
+						cell.style["background-color"] = "#252525";
+						cell.dataset["tetristhere"] = true;
+						cell.dataset["ismoving"] = true;
+					});
+					break;
+				}
+			case "L":
+				{
+					let mino = [
+						document.querySelector(`td[data-cellnum="0E"]`),
+						document.querySelector(`td[data-cellnum="1E"]`),
+						document.querySelector(`td[data-cellnum="2E"]`),
+						document.querySelector(`td[data-cellnum="2F"]`)
+					];
+					mino.forEach(cell => {
+						cell.style["background-color"] = "#252525";
+						cell.dataset["tetristhere"] = true;
+						cell.dataset["ismoving"] = true;
+					});
+					break;
+				}
+			case "J":
+				{
+					let mino = [
+						document.querySelector(`td[data-cellnum="0F"]`),
+						document.querySelector(`td[data-cellnum="1F"]`),
+						document.querySelector(`td[data-cellnum="2F"]`),
+						document.querySelector(`td[data-cellnum="2E"]`)
+					];
+					mino.forEach(cell => {
+						cell.style["background-color"] = "#252525";
+						cell.dataset["tetristhere"] = true;
+						cell.dataset["ismoving"] = true;
+					});
+					break;
+				}
+			case "S":
+				{
+					let mino = [
+						document.querySelector(`td[data-cellnum="0E"]`),
+						document.querySelector(`td[data-cellnum="1E"]`),
+						document.querySelector(`td[data-cellnum="1F"]`),
+						document.querySelector(`td[data-cellnum="2F"]`)
+					];
+					mino.forEach(cell => {
+						cell.style["background-color"] = "#252525";
+						cell.dataset["tetristhere"] = true;
+						cell.dataset["ismoving"] = true;
+					});
+					break;
+				}
+			case "Z":
+				{
+					let mino = [
+						document.querySelector(`td[data-cellnum="0F"]`),
+						document.querySelector(`td[data-cellnum="1E"]`),
+						document.querySelector(`td[data-cellnum="1F"]`),
+						document.querySelector(`td[data-cellnum="2E"]`)
+					];
+					mino.forEach(cell => {
+						cell.style["background-color"] = "#252525";
+						cell.dataset["tetristhere"] = true;
+						cell.dataset["ismoving"] = true;
+					});
+					break;
+				}
 		}
 	}
 	move(type) {
@@ -26,7 +104,7 @@ class TetriMino {
 		let mino = [...document.querySelectorAll(`td[data-ismoving="true"]`)];
 		let next = [];
 		// if (!!(mino.find(cell => parseInt(cell.dataset["cellnum"]) === 21))) return void 0;
-		for (let cell of mino){
+		for (let cell of mino) {
 			let s = cell.dataset["cellnum"].split(/(.)$/).filter(x => x !== "");
 			switch (type) {
 				case "DOWN":

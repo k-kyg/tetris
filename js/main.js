@@ -25,18 +25,19 @@ class TetriMino {
 		const str = "ABCDEFGHIJ".split("");
 		let mino = [...document.querySelectorAll(`td[data-ismoving="true"]`)];
 		let next = [];
-		if (!!(mino.find(cell => parseInt(cell.dataset["cellnum"]) === 21))) return void 0;
-		mino.forEach(cell => {
+		// if (!!(mino.find(cell => parseInt(cell.dataset["cellnum"]) === 21))) return void 0;
+		for (let cell of mino){
 			let s = cell.dataset["cellnum"].split(/(.)$/).filter(x => x !== "");
 			switch (type) {
 				case "DOWN":
 					s[0] = Number(s[0]) + 1;
+					if (s[0] === 22) return void 0;
 					next.push(document.querySelector(`td[data-cellnum="${s.join("")}"]`));
 					break;
 				case "RIGHT":
 					{
 						let x = str.indexOf(s[1]) + 1;
-						if (x < 0 && 9 < x) return void 0;
+						if (x === 10) return void 0;
 						s[1] = str[str.indexOf(s[1]) + 1];
 						next.push(document.querySelector(`td[data-cellnum="${s.join("")}"]`));
 						break;
@@ -44,13 +45,13 @@ class TetriMino {
 				case "LEFT":
 					{
 						let x = str.indexOf(s[1]) - 1;
-						if (x < 0 && 9 < x) return void 0;
+						if (x === -1) return void 0;
 						s[1] = str[str.indexOf(s[1]) - 1];
 						next.push(document.querySelector(`td[data-cellnum="${s.join("")}"]`));
 						break;
 					}
 			}
-		});
+		};
 		mino.forEach(cell => {
 			cell.style["background-color"] = "#FFF";
 			cell.dataset["tetristhere"] = false;

@@ -97,25 +97,31 @@ class TetriMino {
 					break;
 				}
 		}
+		this.moving = true;
 	}
 	move(type) {
 		if (!type.match(/DOWN|RIGHT|LEFT/)) throw new Error("Cannot move this type");
 		const str = "ABCDEFGHIJ".split("");
 		let mino = [...document.querySelectorAll(`td[data-ismoving="true"]`)];
 		let next = [];
-		// if (!!(mino.find(cell => parseInt(cell.dataset["cellnum"]) === 21))) return void 0;
 		for (let cell of mino) {
 			let s = cell.dataset["cellnum"].split(/(.)$/).filter(x => x !== "");
 			switch (type) {
 				case "DOWN":
-					s[0] = Number(s[0]) + 1;
-					if (s[0] === 22) return void 0;
-					next.push(document.querySelector(`td[data-cellnum="${s.join("")}"]`));
-					break;
+					{
+						s[0] = Number(s[0]) + 1;
+						if (s[0] >= 22) {
+							this.moving = false;
+							for (let cell of mino) cell.dataset["ismoving"] = false;
+							return void 0;
+						}
+						next.push(document.querySelector(`td[data-cellnum="${s.join("")}"]`));
+						break;
+					}
 				case "RIGHT":
 					{
 						let x = str.indexOf(s[1]) + 1;
-						if (x === 10) return void 0;
+						if (x >= 10) return void 0;
 						s[1] = str[str.indexOf(s[1]) + 1];
 						next.push(document.querySelector(`td[data-cellnum="${s.join("")}"]`));
 						break;
@@ -123,31 +129,31 @@ class TetriMino {
 				case "LEFT":
 					{
 						let x = str.indexOf(s[1]) - 1;
-						if (x === -1) return void 0;
+						if (x <= -1) return void 0;
 						s[1] = str[str.indexOf(s[1]) - 1];
 						next.push(document.querySelector(`td[data-cellnum="${s.join("")}"]`));
 						break;
 					}
 			}
 		};
-		mino.forEach(cell => {
+		for (let cell of mino) {
 			cell.style["background-color"] = "#FFF";
 			cell.dataset["tetristhere"] = false;
 			cell.dataset["ismoving"] = false;
-		});
-		next.forEach(cell => {
+		}
+		for (let cell of next) {
 			if (this.checkaround(mino).find(x => x === cell)) return void 0;
-		});
-		next.forEach(cell => {
+		};
+		for (let cell of next) {
 			cell.style["background-color"] = "#252525";
 			cell.dataset["tetristhere"] = true;
 			cell.dataset["ismoving"] = true;
-		});
+		};
 	}
 	checkaround(mino) {
 		let blockthere = [];
 		const s = "ABCDEFGHIJ".split("");
-		mino.forEach(cell => {
+		for (let cell of mino) {
 			const where = cell.dataset["cellnum"].split(/(.)$/).filter(x => x !== "");
 			let top = [],
 				middle = [],
@@ -163,7 +169,7 @@ class TetriMino {
 			let arr = [...top, ...middle, ...under];
 			arr = arr.filter(x => !!x);
 			blockthere.push(arr);
-		});
+		};
 		return blockthere;
 	}
 }
